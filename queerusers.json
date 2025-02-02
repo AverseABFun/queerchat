@@ -1,0 +1,88 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "https://raw.githubusercontent.com/AverseABFun/queerchat/refs/heads/main/queerusers.json",
+    "x-tombi-toml-version": "v1.0.0",
+    "type": [
+        "null",
+        "string",
+        "object"
+    ],
+    "properties": {
+        "allowlist": {
+            "type": [
+                "null",
+                "array"
+            ],
+            "description": "The list of connections to allow in.",
+            "items": {
+                "$id": "user",
+                "type": "object",
+                "description": "A key and username to allow list. It requires both to match to allow in.",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "description": "The name of the user to allow in."
+                    },
+                    "key": {
+                        "type": "string",
+                        "description": "The key of the user to allow in. Run \"key (user)\" to get the key."
+                    }
+                }
+            }
+        },
+        "blacklist": {
+            "type": [
+                "null",
+                "array"
+            ],
+            "description": "The list of connections to not allow in.",
+            "items": {
+                "$id": "user-ip",
+                "type": "object",
+                "description": "A key, username, and IP to black list. If any to match it will deny access.",
+                "properties": {
+                    "name": {
+                        "type": [
+                            "null",
+                            "string"
+                        ],
+                        "description": "The name of the user to not allow in."
+                    },
+                    "key": {
+                        "type": [
+                            "null",
+                            "string"
+                        ],
+                        "description": "The key of the user to not allow in. Run \"key (user)\" to get the key."
+                    },
+                    "ip": {
+                        "type": [
+                            "null",
+                            "string"
+                        ],
+                        "description": "The IP of the user to not allow in. Run \"ip (user)\" to get the ip."
+                    }
+                }
+            }
+        },
+        "mapping": {
+            "type": [
+                "null",
+                "array"
+            ],
+            "description": "A mapping of names to keys. New connections will be checked against this to prevent spoofing names.",
+            "items": {
+                "$ref": "user"
+            }
+        }
+    },
+    "title": "queerusers.json schema for queerchat",
+    "x-taplo-info": {
+        "authors": [
+            "Arthur Beck (https://github.com/AverseABFun)"
+        ],
+        "patterns": [
+            "^(.*(/|\\\\)queerusers\\.toml|queerusers\\.toml)$"
+        ]
+    }
+}
