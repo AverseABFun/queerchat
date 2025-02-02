@@ -1181,6 +1181,7 @@ dependencies = [
  "rand_core",
  "rpassword",
  "russh",
+ "serde",
  "tokio",
  "toml",
 ]

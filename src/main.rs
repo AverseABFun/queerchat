@@ -1,4 +1,5 @@
 #![feature(duration_constructors)]
+#![feature(string_remove_matches)]
 
 use std::collections::HashMap;
 use std::io::Write;
@@ -6,15 +7,17 @@ use std::sync::Arc;
 use std::{fs, io};
 
 use base64::prelude::*;
-use russh::keys::{decode_openssh, PrivateKey};
+use config::deserialize_config;
+use russh::keys::{PrivateKey, decode_openssh};
 use russh::server::Server as _;
 use russh::*;
 use tokio::sync::Mutex;
 use users::USER_QUEERBOT;
 
+mod config;
+mod messages;
 mod server;
 mod users;
-mod config;
 
 use crate::server::*;
 
@@ -135,7 +138,9 @@ async fn main() {
     let mut sh = Server {
         clients: Arc::new(Mutex::new(HashMap::new())),
         id: 1,
-        user: USER_QUEERBOT
+        user: Arc::new(std::sync::Mutex::new(USER_QUEERBOT)),
+        cfg: deserialize_config(&fs::read_to_string("./queer.toml").unwrap()).unwrap(),
+        buf: Arc::new(std::sync::Mutex::new(vec![])),
     };
 
     sh.run_on_address(config, ("0.0.0.0", 8184)).await.unwrap();

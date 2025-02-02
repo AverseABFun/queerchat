@@ -1,7 +1,6 @@
 #:schema https://raw.githubusercontent.com/AverseABFun/queerchat/refs/heads/main/queer.json
 users = "./queerusers.toml"
 prevent_spoofing = true
-max_msg_len = 500
 
 [motd]
 server_name = "Example Server"

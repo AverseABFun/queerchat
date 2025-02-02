@@ -11,5 +11,6 @@ log = "0.4.25"
 rand_core = { version = "0.6.4", features = ["getrandom", "std"] }
 rpassword = "7.3.1"
 russh = "0.50.0"
+serde = { version = "1.0.217", features = ["serde_derive"] }
 tokio = "1.43.0"
 toml = "0.8.19"
